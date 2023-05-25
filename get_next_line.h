@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 15:55:36 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/23 13:54:53 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:14:07 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,18 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);
+char	*read_file(int fd, char *stash);
+char	*get_line(char *stash);
+char	*clean_stash(char *stash);
+size_t	ft_strlen(const char *str);
+char	*ft_strchr(const char *str, int searched_char);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *src);
+
+
 
 #endif GET_NEXT_LINE_H
