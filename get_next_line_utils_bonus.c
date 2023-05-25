@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:44:22 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 15:51:12 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:31:41 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,22 @@ char	*ft_strchr(const char *str, int searched_char)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	len;
 	char	*res;
 	int		i;
 	int		j;
 
+	if (!s1)
+	{
+		s1 = malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
 	i = 0;
 	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	res = malloc(sizeof(char) * (len + 1));
+	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!res)
 		return (NULL);
 	while (s1[i])
@@ -63,30 +66,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		res[j++] = s2[i++];
 	res[j] = '\0';
+	free (s1);
 	return (res);
-}
-
-char	*ft_strdup(const char *src)
-{
-	int		src_len;
-	char	*p;
-	int		i;
-
-	if (!src)
-		return (NULL);
-	i = 0;
-	while (src[i])
-		i++;
-	src_len = i;
-	p = malloc((src_len + 1) * sizeof(char));
-	if (p == NULL)
-		return (NULL);
-	i = 0;
-	while (i < src_len)
-	{
-		p[i] = src[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
 }

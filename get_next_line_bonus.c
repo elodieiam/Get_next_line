@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:44:01 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 16:17:31 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:31:03 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*clean_stash(char *stash)
 	j = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	if (!stash[i])// si on a atteint la fin du fichier et donc rien à stocker (== stash[i] == '\0')
+	if (!stash[i])
 	{
 		free (stash);
 		return (NULL);
@@ -30,22 +30,22 @@ char	*clean_stash(char *stash)
 	s = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (!s)
 		return (NULL);
-	i++; //pour passer sur \n
+	i++;
 	while (stash[i])
 		s[j++] = stash[i++];
 	s[j] = '\0';
-	free (stash); //on free la précédente adresse
-	return (s); //on renvoie la nouvelle
+	free (stash);
+	return (s);
 }
 
-/* Pour extraire la ligne de end_line.
-*/
 char	*get_line(char *stash)
 {
 	char	*s;
 	int		i;
 
 	i = 0;
+	if (!stash[i]) //ce sont les deux lignes qui font tout foirer :s'il n'y a rien à récupérer dans stash pour line. 
+		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	s = malloc(sizeof(char) * (i + 2));
@@ -57,19 +57,15 @@ char	*get_line(char *stash)
 		s[i] = stash[i];
 		i++;
 	}
-	if (stash[i] == '\n') //car ça peut être la fin de la ligne sans \n
+	if (stash[i] == '\n')
 	{
 		s[i] = '\n';
 		i++;
 	}
 	s[i] = '\0';
 	return (s);
-} //on ne free rien car s est la ligne qu'on renvoie et on a encore besoin de stash
+}
 
-/* read_file : on lit dans le fichier jusqu'à ce qu'on tombe sur \n 
-ou sur la fin du fichier txt. A chaque passage de read on strjoin buff et end_line
-pour conserver ce qui avait déjà été stocké dedans.
-*/
 char	*read_file(int fd, char *stash)
 {
 	char	*buffer;
@@ -79,7 +75,7 @@ char	*read_file(int fd, char *stash)
 	if (!buffer)
 		return (NULL);
 	read_bytes = 1;
-	while ((!ft_strchr(stash, '\n')) && read_bytes > 0)
+	while ((!ft_strchr(stash, '\n')) && read_bytes != 0)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes == (-1))
@@ -88,17 +84,12 @@ char	*read_file(int fd, char *stash)
 			return (NULL);
 		}
 		buffer[read_bytes] = '\0';
-		if (!stash) //si 1e utilisation et donc stash est initialisé à NULL
-		stash = ft_strdup("");//alors chaîne vide
 		stash = ft_strjoin(stash, buffer);
 	}
 	free (buffer);
 	return (stash);
 }
 
-/* GNL : on stocke tout ce qui est lu par read dans stash,
-on extrait line de end_line puis on nettoie stash
-*/
 char	*get_next_line(int fd)
 {
 	static char	*stash[MAX_FD];
