@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/21 15:57:05 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 16:17:42 by elrichar         ###   ########.fr       */
+/*   Created: 2023/05/25 15:44:01 by elrichar          #+#    #+#             */
+/*   Updated: 2023/05/25 16:17:31 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Pour nettoyer stash et ne garder que ce qu'on a lu après la ligne renvoyée
-*/
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*clean_stash(char *stash)
 {
@@ -103,15 +101,15 @@ on extrait line de end_line puis on nettoie stash
 */
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[MAX_FD];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, stash, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, stash[fd], 0) == -1)
 		return (NULL);
-	stash = read_file(fd, stash);
-	if (!stash)
+	stash[fd] = read_file(fd, stash[fd]);
+	if (!stash[fd])
 		return (NULL);
-	line = get_line (stash);
-	stash = clean_stash(stash);
+	line = get_line (stash[fd]);
+	stash[fd] = clean_stash(stash[fd]);
 	return (line);
 }

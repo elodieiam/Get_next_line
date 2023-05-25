@@ -5,7 +5,7 @@
 int main(void)
 {
     //int fd = open( "/home/elodie/Get_next_line/txt",O_RDONLY);
-    int fd = 0;
+    int fd = 2;
     char    *line;
     while (1)
     {
