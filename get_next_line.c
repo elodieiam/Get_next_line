@@ -6,12 +6,13 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 15:57:05 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 12:07:57 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:23:45 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Pour nettoyer stash et ne garder que ce qu'on a lu après la ligne renvoyée
 */
+#include "get_next_line.h"
 
 char	*clean_stash(char *stash)
 {
@@ -35,8 +36,8 @@ char	*clean_stash(char *stash)
 	while (stash[i])
 		s[j++] = stash[i++];
 	s[j] = '\0';
-	free (save); //on free la précédente adresse
-	reeturn (s); //on renvoie la nouvelle
+	free (stash); //on free la précédente adresse
+	return (s); //on renvoie la nouvelle
 }
 
 /* Pour extraire la ligne de end_line.

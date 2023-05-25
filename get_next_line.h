@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 15:55:36 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 12:14:07 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:23:02 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
+# include <stdlib.h>
+# include <unistd.h>
 
 char	*get_next_line(int fd);
 char	*read_file(int fd, char *stash);
@@ -28,4 +31,4 @@ char	*ft_strdup(const char *src);
 
 
 
-#endif GET_NEXT_LINE_H
+#endif
