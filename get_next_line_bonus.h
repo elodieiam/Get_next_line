@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:44:40 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 19:31:18 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:54:10 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
-# define MAX_FD 42
 
 # include <stdlib.h>
 # include <unistd.h>

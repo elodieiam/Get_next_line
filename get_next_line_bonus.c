@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:44:01 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 19:31:03 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:12:59 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ char	*read_file(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash[MAX_FD];
+	static char	*stash[1024];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, stash[fd], 0) == -1)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash[fd] = read_file(fd, stash[fd]);
 	if (!stash[fd])
