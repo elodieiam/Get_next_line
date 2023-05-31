@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:52:05 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/25 19:14:55 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:13:00 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,16 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 
-	if (!s1)
-	{
-		s1 = malloc(1 * sizeof(char));
-		s1[0] = '\0';
-	}
 	if (!s1 || !s2)
 		return (NULL);
 	i = 0;
 	j = 0;
 	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!res)
+	{
+		free(s1);
 		return (NULL);
+	}
 	while (s1[i])
 		res[j++] = s1[i++];
 	i = 0;
@@ -69,5 +67,3 @@ char	*ft_strjoin(char *s1, char *s2)
 	free (s1);
 	return (res);
 }
-//res prend ce qu'il y a dans s1. s1 a été alloué dynamiquement et ne sert plus donc on free
-

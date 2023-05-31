@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:44:01 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/26 13:12:59 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:46:24 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ char	*clean_stash(char *stash)
 		free (stash);
 		return (NULL);
 	}
-	s = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
+	s = malloc(sizeof(char) * (ft_strlen(stash) - i));
 	if (!s)
+	{
+		free(stash);
 		return (NULL);
+	}
 	i++;
 	while (stash[i])
 		s[j++] = stash[i++];
@@ -44,7 +47,7 @@ char	*get_line(char *stash)
 	int		i;
 
 	i = 0;
-	if (!stash[i]) //ce sont les deux lignes qui font tout foirer :s'il n'y a rien à récupérer dans stash pour line. 
+	if (!stash[i])
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
@@ -81,6 +84,7 @@ char	*read_file(int fd, char *stash)
 		if (read_bytes == (-1))
 		{
 			free (buffer);
+			free (stash);
 			return (NULL);
 		}
 		buffer[read_bytes] = '\0';
@@ -95,6 +99,13 @@ char	*get_next_line(int fd)
 	static char	*stash[1024];
 	char		*line;
 
+	if (!stash[fd])
+	{
+		stash[fd] = malloc (sizeof(char));
+		if (!stash[fd])
+			return (NULL);
+		stash[fd][0] = '\0';
+	}
 	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash[fd] = read_file(fd, stash[fd]);
