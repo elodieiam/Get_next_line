@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 15:57:05 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/31 15:19:45 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:37:53 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ char	*get_line(char *stash)
 		i++;
 	}
 	if (stash[i] == '\n')
-	{
-		s[i] = '\n';
-		i++;
-	}
+		s[i++] = '\n';
 	s[i] = '\0';
 	return (s);
 }
@@ -112,6 +109,11 @@ char	*get_next_line(int fd)
 	if (!stash)
 		return (NULL);
 	line = get_line(stash);
+	if (!line)
+	{
+		free (stash);
+		return (NULL);
+	}
 	stash = clean_stash(stash);
 	return (line);
 }
