@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:44:01 by elrichar          #+#    #+#             */
-/*   Updated: 2023/05/31 15:46:24 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/06/01 10:12:18 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ char	*get_next_line(int fd)
 	static char	*stash[1024];
 	char		*line;
 
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
+		return (NULL);
+	stash[fd] = read_file(fd, stash[fd]);
 	if (!stash[fd])
 	{
 		stash[fd] = malloc (sizeof(char));
@@ -106,9 +109,6 @@ char	*get_next_line(int fd)
 			return (NULL);
 		stash[fd][0] = '\0';
 	}
-	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
-		return (NULL);
-	stash[fd] = read_file(fd, stash[fd]);
 	if (!stash[fd])
 		return (NULL);
 	line = get_line (stash[fd]);
