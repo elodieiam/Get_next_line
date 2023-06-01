@@ -6,7 +6,7 @@
 /*   By: elrichar <elrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:44:01 by elrichar          #+#    #+#             */
-/*   Updated: 2023/06/01 10:34:53 by elrichar         ###   ########.fr       */
+/*   Updated: 2023/06/01 12:21:08 by elrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ char	*get_line(char *stash)
 		i++;
 	}
 	if (stash[i] == '\n')
-	{
-		s[i] = '\n';
-		i++;
-	}
+		s[i++] = '\n';
 	s[i] = '\0';
 	return (s);
 }
@@ -101,7 +98,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash[fd] = read_file(fd, stash[fd]);
 	if (!stash[fd])
 	{
 		stash[fd] = malloc (sizeof(char));
@@ -109,9 +105,15 @@ char	*get_next_line(int fd)
 			return (NULL);
 		stash[fd][0] = '\0';
 	}
+	stash[fd] = read_file(fd, stash[fd]);
 	if (!stash[fd])
 		return (NULL);
 	line = get_line (stash[fd]);
+	if (!line)
+	{
+		free (stash[fd]);
+		return (NULL);
+	}
 	stash[fd] = clean_stash(stash[fd]);
 	return (line);
 }
