@@ -13,3 +13,8 @@ By creating this function we get a deeper understanding of how to handle input e
 1. Improve file input/ouput handling skills in C
 2. Master dynamic memory allocation and static variables
 3. Enhance understanding of buffer management
+
+## Installation
+To install the function :
+
+git clone  git@github.com:elodieiam/get_next_line.git
