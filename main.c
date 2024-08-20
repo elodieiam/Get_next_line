@@ -10,9 +10,10 @@ int main(void)
    do
 	{
 		line =  get_next_line(fd);
-		printf(" gnl = %s\n", line);
+		printf("\033[1;35mgnl = %s\033[0m\n", line);
 		free(line);
 	} while (line);
 
+	close (fd);
     return (0);
 }

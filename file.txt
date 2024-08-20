@@ -1,3 +1,10 @@
-ffffff
-hhhhh
-ffffff
+Line 1: This is the first line of text.
+Line 2: This is the second line.
+Line 3: Here is the third line.
+Line 4: The fourth line is here.
+Line 5: You are now reading the fifth line.
+Line 6: Line six follows.
+Line 7: This is the seventh line of our example.
+Line 8: Almost there, this is line eight.
+Line 9: This is the penultimate line.
+Line 10: Finally, this is the tenth and last line.
